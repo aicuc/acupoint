@@ -1,0 +1,10 @@
+Human model: adapted MakeHuman hm08 basemesh.
+Original asset: https://github.com/makehumancommunity/makehuman/blob/d26635e9326e3cca30778fd7b9c00062b03cce09/makehuman/data/3dobjs/base.obj
+Upstream repository: https://github.com/makehumancommunity/makehuman
+Asset path: makehuman/data/3dobjs/base.obj
+License: CC0 1.0 Universal. The original asset header explicitly dedicates this mesh to CC0 (September 2020).
+License text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Original copyright holders listed in the asset:
+2020 Data Collection AB; Joel Palmius; Jonas Hauquier.
+Changes: body and eye helper extraction, stance and arm transformations, coordinate quantization, triangulation and browser packaging.
+The atlas code does not include MakeHuman application code. Acupoint placement on this adapted mesh is illustrative and has not been clinically validated.
