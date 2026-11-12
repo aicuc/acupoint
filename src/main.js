@@ -1,9 +1,9 @@
-import {createHuman, nearestSurface} from './human-model.js';
-import {associations, createEffects} from './effects.js';
-import {channels, catalog} from './catalog.js';
-import {initialPoints, extraPoints} from './points.js';
+import {createHuman, nearestSurface} from './scene/human-model.js';
+import {associations, createEffects} from './scene/effects.js';
+import {channels, catalog} from './data/catalog.js';
+import {initialPoints, extraPoints} from './data/points.js';
 import * as T from 'three';
-import {OrbitControls} from './OrbitControls.js';
+import {OrbitControls} from './vendor/OrbitControls.js';
 
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);

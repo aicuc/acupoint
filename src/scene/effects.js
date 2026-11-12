@@ -1,4 +1,4 @@
-import * as T from './three.module.js';
+import * as T from '../vendor/three.module.js';
 // Target positions represent symptom regions, not organs or causal pathways.
 export const associations={
  LI4:{kind:'传统主治关联',source:'https://zh.wikipedia.org/wiki/合谷穴',note:'传统资料涉及头面、口齿与胃肠不适。连线仅将这些描述转换为区域示意，不表示作用机制或疗效保证。',targets:[['头面部',[0,7.46,.5]],['口齿区域',[.12,7.19,.5]],['腹部',[0,5.35,.58]]]},
