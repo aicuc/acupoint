@@ -13,21 +13,42 @@ colors['经外奇穴'] = '#e6a8b2';
 
 // 子午流注与五行属性元数据
 const channelMeta = {
-  '手太阴肺经':   {short: '肺经', element: '金 · 阴经', shichen: '寅时 03:00–05:00', branch: '寅'},
-  '手阳明大肠经': {short: '大肠', element: '金 · 阳经', shichen: '卯时 05:00–07:00', branch: '卯'},
-  '足阳明胃经':   {short: '胃经', element: '土 · 阳经', shichen: '辰时 07:00–09:00', branch: '辰'},
-  '足太阴脾经':   {short: '脾经', element: '土 · 阴经', shichen: '巳时 09:00–11:00', branch: '巳'},
-  '手少阴心经':   {short: '心经', element: '火 · 阴经', shichen: '午时 11:00–13:00', branch: '午'},
-  '手太阳小肠经': {short: '小肠', element: '火 · 阳经', shichen: '未时 13:00–15:00', branch: '未'},
-  '足太阳膀胱经': {short: '膀胱', element: '水 · 阳经', shichen: '申时 15:00–17:00', branch: '申'},
-  '足少阴肾经':   {short: '肾经', element: '水 · 阴经', shichen: '酉时 17:00–19:00', branch: '酉'},
-  '手厥阴心包经': {short: '心包', element: '相火 · 阴经', shichen: '戌时 19:00–21:00', branch: '戌'},
-  '手少阳三焦经': {short: '三焦', element: '相火 · 阳经', shichen: '亥时 21:00–23:00', branch: '亥'},
-  '足少阳胆经':   {short: '胆经', element: '木 · 阳经', shichen: '子时 23:00–01:00', branch: '子'},
-  '足厥阴肝经':   {short: '肝经', element: '木 · 阴经', shichen: '丑时 01:00–03:00', branch: '丑'},
-  '督脉':         {short: '督脉', element: '阳脉之海', shichen: '奇经 · 贯脊属脑', branch: '督'},
-  '任脉':         {short: '任脉', element: '阴脉之海', shichen: '奇经 · 总任诸阴', branch: '任'},
-  '经外奇穴':     {short: '奇穴', element: '经外选录', shichen: '奇穴 · 经验效穴', branch: '奇'}
+  '手太阴肺经':   {short: '肺经', element: '金 · 阴经', shichen: '寅时 03:00–05:00', branchIdx: 2},
+  '手阳明大肠经': {short: '大肠', element: '金 · 阳经', shichen: '卯时 05:00–07:00', branchIdx: 3},
+  '足阳明胃经':   {short: '胃经', element: '土 · 阳经', shichen: '辰时 07:00–09:00', branchIdx: 4},
+  '足太阴脾经':   {short: '脾经', element: '土 · 阴经', shichen: '巳时 09:00–11:00', branchIdx: 5},
+  '手少阴心经':   {short: '心经', element: '火 · 阴经', shichen: '午时 11:00–13:00', branchIdx: 6},
+  '手太阳小肠经': {short: '小肠', element: '火 · 阳经', shichen: '未时 13:00–15:00', branchIdx: 7},
+  '足太阳膀胱经': {short: '膀胱', element: '水 · 阳经', shichen: '申时 15:00–17:00', branchIdx: 8},
+  '足少阴肾经':   {short: '肾经', element: '水 · 阴经', shichen: '酉时 17:00–19:00', branchIdx: 9},
+  '手厥阴心包经': {short: '心包', element: '相火 · 阴经', shichen: '戌时 19:00–21:00', branchIdx: 10},
+  '手少阳三焦经': {short: '三焦', element: '相火 · 阳经', shichen: '亥时 21:00–23:00', branchIdx: 11},
+  '足少阳胆经':   {short: '胆经', element: '木 · 阳经', shichen: '子时 23:00–01:00', branchIdx: 0},
+  '足厥阴肝经':   {short: '肝经', element: '木 · 阴经', shichen: '丑时 01:00–03:00', branchIdx: 1},
+  '督脉':         {short: '督脉', element: '阳脉之海', shichen: '奇经 · 贯脊属脑', branchIdx: -1},
+  '任脉':         {short: '任脉', element: '阴脉之海', shichen: '奇经 · 总任诸阴', branchIdx: -1},
+  '经外奇穴':     {short: '奇穴', element: '经外选录', shichen: '奇穴 · 经验效穴', branchIdx: -1}
+};
+
+// 经典特定穴属性标签
+const specialPoints = {
+  LU1: '肺募穴', LU5: '合穴', LU6: '郄穴', LU7: '络穴 · 八脉交会(通任)', LU9: '原穴 · 脉会', LU11: '井穴',
+  LI1: '井穴', LI4: '原穴 · 四总穴(面口)', LI5: '经穴', LI6: '络穴', LI11: '合穴',
+  ST25: '大肠募穴', ST34: '郄穴', ST36: '合穴 · 四总穴(肚腹)', ST40: '络穴', ST41: '经穴', ST44: '荥穴',
+  SP3: '原穴 · 输穴', SP4: '络穴 · 八脉交会(通冲)', SP6: '足三阴交会', SP8: '郄穴', SP9: '合穴',
+  HT3: '合穴', HT5: '络穴', HT7: '原穴 · 输穴', HT9: '井穴',
+  SI1: '井穴', SI3: '输穴 · 八脉交会(通督)', SI4: '原穴', SI6: '郄穴', SI8: '合穴',
+  BL11: '八会穴之骨会', BL13: '肺背俞穴', BL15: '心背俞穴', BL17: '八会穴之血会',
+  BL18: '肝背俞穴', BL20: '脾背俞穴', BL21: '胃背俞穴', BL23: '肾背俞穴', BL25: '大肠背俞穴',
+  BL28: '膀胱背俞穴', BL40: '合穴 · 四总穴(腰背)', BL60: '经穴', BL62: '八脉交会(通阳跷)', BL67: '井穴',
+  KI1: '井穴', KI3: '原穴 · 输穴', KI6: '八脉交会(通阴跷)', KI7: '经穴', KI10: '合穴',
+  PC3: '合穴', PC4: '郄穴', PC6: '络穴 · 八脉交会(通阴维)', PC7: '原穴 · 输穴', PC8: '荥穴', PC9: '井穴',
+  TE4: '原穴', TE5: '络穴 · 八脉交会(通阳维)', TE6: '经穴', TE10: '合穴',
+  GB20: '手足少阳阳维交会', GB24: '胆募穴', GB34: '合穴 · 八会穴之筋会', GB37: '络穴', GB39: '八会穴之髓会', GB40: '原穴', GB41: '输穴 · 八脉交会(通带)',
+  LR2: '荥穴', LR3: '原穴 · 输穴', LR5: '络穴', LR8: '合穴', LR13: '脾募穴 · 脏会', LR14: '肝募穴',
+  GV4: '命门要穴', GV14: '手足三阳督脉之会', GV20: '诸阳之会', GV26: '急救要穴',
+  CV3: '膀胱募穴', CV4: '小肠募穴 · 元气要穴', CV6: '肓之原穴', CV12: '胃募穴 · 腑会', CV17: '心包募穴 · 气会',
+  'EX-HN3': '经外奇穴', 'EX-HN5': '经外奇穴'
 };
 
 // Learning emphasis selected for this atlas, not a clinical importance ranking.
@@ -71,31 +92,47 @@ const data = [
 }));
 
 let effectLayer = null, effectPaused = false;
-let selected = 3, region = '全部', query = '', channelFilter = '全部', scope = 'model';
-let scene, camera, renderer, controls, humanMesh, wireMesh, compassMesh, ambientParticles;
-let markers = [], lines = [], qiParticles = [], body = [], auto = false;
-let reticleGroup, innerReticle, outerReticle;
+let selected = 12, region = '全部', query = '', channelFilter = '全部', scope = 'model'; // Default 合谷 (LI4) or 百会
+// Keep default 百会/迎香 or 合谷? Let's check index 12 -> 合谷, index 3 -> 迎香. Let's default to 合谷 (id of LI4) so user immediately sees glowing curves + light needle!
+selected = data.find(p => p.code === 'LI4')?.id ?? 3;
+
+let scene, camera, renderer, controls, humanMesh, wireMesh, compassMesh, haloRingMesh, ambientParticles;
+let markers = [], meridianSegments = [], activeQiParticles = [], body = [], auto = false;
+let reticleGroup, innerReticle, outerReticle, needleGroup;
 let flyAnim = null;
+
+// Shader uniforms for custom sculptural human rendering
+const skinUniforms = {
+  uTime: {value: 0},
+  uRimColor: {value: new T.Color(0x6ef2de)},
+  uRimPower: {value: 2.35},
+  uRimStrength: {value: 0.78},
+  uPatinaColor: {value: new T.Color(0x45a394)},
+  uPatinaStrength: {value: 0.0},
+  uScanStrength: {value: 0.32},
+  uContourStrength: {value: 0.08},
+  uXrayFade: {value: 0.0}
+};
 
 // 计算当前时辰当令经脉
 function getCurrentShichenMeridian() {
   const h = new Date().getHours();
   const order = [
-    ['足少阳胆经', '子时'],   // 23-1
-    ['足厥阴肝经', '丑时'],   // 1-3
-    ['手太阴肺经', '寅时'],   // 3-5
-    ['手阳明大肠经', '卯时'], // 5-7
-    ['足阳明胃经', '辰时'],   // 7-9
-    ['足太阴脾经', '巳时'],   // 9-11
-    ['手少阴心经', '午时'],   // 11-13
-    ['手太阳小肠经', '未时'], // 13-15
-    ['足太阳膀胱经', '申时'], // 15-17
-    ['足少阴肾经', '酉时'],   // 17-19
-    ['手厥阴心包经', '戌时'], // 19-21
-    ['手少阳三焦经', '亥时']  // 21-23
+    ['足少阳胆经', '子时'],
+    ['足厥阴肝经', '丑时'],
+    ['手太阴肺经', '寅时'],
+    ['手阳明大肠经', '卯时'],
+    ['足阳明胃经', '辰时'],
+    ['足太阴脾经', '巳时'],
+    ['手少阴心经', '午时'],
+    ['手太阳小肠经', '未时'],
+    ['足太阳膀胱经', '申时'],
+    ['足少阴肾经', '酉时'],
+    ['手厥阴心包经', '戌时'],
+    ['手少阳三焦经', '亥时']
   ];
   const idx = Math.floor(((h + 1) % 24) / 2);
-  return {meridian: order[idx][0], shichen: order[idx][1]};
+  return {meridian: order[idx][0], shichen: order[idx][1], branchIdx: idx};
 }
 
 const activeShichen = getCurrentShichenMeridian();
@@ -131,6 +168,9 @@ function syncMeridianPills() {
   $$('#meridianPills button').forEach(b => {
     b.classList.toggle('active', b.dataset.channel === channelFilter);
   });
+  if ($('#channelBadgeMini')) {
+    $('#channelBadgeMini').textContent = channelFilter === '全部' ? '全部' : (channelMeta[channelFilter]?.short || channelFilter);
+  }
   const filterBadge = $('#activeFilterBadge');
   if (filterBadge) {
     const parts = [];
@@ -144,7 +184,6 @@ function syncMeridianPills() {
 
 function setChannelFilter(val) {
   channelFilter = val;
-  $('#channelFilter').value = val;
   syncMeridianPills();
   list();
 }
@@ -161,9 +200,9 @@ function list() {
                 <i class="row-dot" style="background:${colors[p.meridian]};color:${colors[p.meridian]}"></i>
                 ${p.name}
                 ${p.important ? '<i class="key-badge">重点</i>' : ''}
-                ${associations[p.code] ? '<i class="fx-badge">关联</i>' : ''}
+                ${associations[p.code] ? '<i class="fx-badge">流光</i>' : ''}
               </b>
-              <small>${p.meridian} · ${p.modeled ? p.region + ' · 3D' : '仅目录索引'}</small>
+              <small>${p.meridian} · ${p.modeled ? p.region + ' · 3D' : '仅目录'}</small>
             </span>
             <span>${p.code}</span>
           </button>`
@@ -172,7 +211,7 @@ function list() {
     : '<p class="muted" style="padding:14px 4px">没有匹配的穴位。试试重置筛选，或切换至「完整目录」。</p>';
 
   $('#list').querySelectorAll('button').forEach(b => (b.onclick = () => select(+b.dataset.id, true)));
-  $('#stageCount').textContent = `${data.filter(p => p.modeled && visible(p)).length} 个 3D 穴位可见`;
+  $('#stageCount').textContent = `${data.filter(p => p.modeled && visible(p)).length} 个 3D 穴位`;
 
   const c = channels.find(c => c.name === channelFilter);
   const meta = channelMeta[channelFilter];
@@ -180,12 +219,43 @@ function list() {
   if (c && meta) {
     metaEl.hidden = false;
     metaEl.innerHTML = `<span class="meta-tag gold">${meta.element}</span><span class="meta-tag">${meta.shichen}</span>`;
-    $('#channelSummary').textContent = `循行：${c.route}（共 ${c.names.length} 穴，已三维建模 ${mapped.filter(p => p.meridian === c.name).length} 穴）`;
+    $('#channelSummary').textContent = `循行：${c.route}（共 ${c.names.length} 穴，3D 建模 ${mapped.filter(p => p.meridian === c.name).length} 穴）`;
   } else {
     metaEl.hidden = true;
-    $('#channelSummary').textContent = '涵盖十二正经与任督二脉 361 穴，另选录印堂、太阳 2 奇穴。';
+    $('#channelSummary').textContent = '收录十四经脉 361 穴与 2 奇穴，点击矩阵切换单经探穴。';
   }
   syncMeridianPills();
+}
+
+function rebuildActiveQiParticles() {
+  if (!scene || !dotTex) return;
+  for (const qp of activeQiParticles) {
+    scene.remove(qp.sprite);
+    qp.sprite.material.dispose();
+  }
+  activeQiParticles = [];
+  const activeMeridian = data[selected]?.meridian;
+  const activeSide = Number($('#sideChoice').value);
+  const segs = meridianSegments.filter(
+    s => s.meridian === activeMeridian && (!s.bilateral || s.side === activeSide || channelFilter === activeMeridian)
+  );
+  segs.forEach((seg, idx) => {
+    for (let k = 0; k < 2; k++) {
+      const sp = new T.Sprite(
+        new T.SpriteMaterial({
+          map: dotTex,
+          color: k === 0 ? 0xfff5d6 : colors[seg.meridian],
+          transparent: true,
+          opacity: k === 0 ? 0.95 : 0.72,
+          depthWrite: false,
+          blending: T.AdditiveBlending
+        })
+      );
+      sp.scale.set(k === 0 ? 0.088 : 0.065, k === 0 ? 0.088 : 0.065, 1);
+      scene.add(sp);
+      activeQiParticles.push({sprite: sp, seg, offset: (idx * 0.19 + k * 0.5) % 1});
+    }
+  });
 }
 
 function select(id, turn = false) {
@@ -194,40 +264,51 @@ function select(id, turn = false) {
   for (const key of ['code', 'name', 'pinyin', 'meridian', 'location']) {
     $('#' + key).textContent = p[key];
   }
-  const mColor = colors[p.meridian] || '#6cf0dc';
+  const mColor = colors[p.meridian] || '#6ef2de';
   $('#meridian').style.borderColor = mColor + '66';
   $('#meridian').style.color = mColor;
 
   const meta = channelMeta[p.meridian] || {element: '经穴', shichen: ''};
   if ($('#elementBadge')) $('#elementBadge').textContent = meta.element;
-  if ($('#bilateralBadge')) $('#bilateralBadge').textContent = p.bilateral ? '左右对称双穴' : '正中单穴';
+  if ($('#bilateralBadge')) $('#bilateralBadge').textContent = p.bilateral ? '左右双穴' : '正中单穴';
+
+  const spTag = specialPoints[p.code];
+  const spEl = $('#specialBadge');
+  if (spEl) {
+    spEl.hidden = !spTag;
+    if (spTag) spEl.textContent = spTag;
+  }
 
   $('#modelStatus').textContent = p.important ? '★ 重点选录穴位' : p.modeled ? '● 3D 空间点位' : '○ 仅目录索引';
   $('#modelStatus').classList.toggle('important', p.important);
 
   $('#focus').disabled = !p.modeled;
   $('#focus').innerHTML = p.modeled
-    ? '<span>聚焦此穴位 · 镜头推进</span><span class="focus-arrow">↗</span>'
+    ? '<span>聚焦此穴位 · 光针特写</span><span class="focus-arrow">↗</span>'
     : '<span>此穴位暂未配置三维坐标</span>';
 
   $('#tip').textContent = p.modeled
     ? p.bilateral
-      ? '成对分布于身体左右两侧。可通过上方「对称侧」切换左/右观察，滚轮放大可查看局部经脉连线。'
-      : '位于头面或躯干正中线（任督二脉）。结合正面或背面视角可清晰观察上下穴位排布。'
-    : '当前仅收录标准编码、名称及经脉次序。选择带「3D」标记的穴位可在三维人体模型上定位。';
+      ? '成对分布于人体左右两侧。可切换顶部「观察侧」或拖动模型，观察经脉光路与体表标志。'
+      : '位于躯干或头面正中线（任督二脉）。结合正面或背面视角，可清晰追踪经脉上下贯通关系。'
+    : '当前收录标准国际编码与所属经脉顺序。点击带「3D」标记的穴位可在三维人体上查看。';
 
   const c = channels.find(c => c.name === p.meridian);
   $('#routeInfo').textContent = c ? `循行方向：${c.route}` : '不归属于十四经脉的经验选录奇穴。';
   if ($('#shichenDetail')) {
-    $('#shichenDetail').innerHTML = `<span>子午流注：<b>${meta.shichen}</b></span><span>五行：<b>${meta.element}</b></span>`;
+    $('#shichenDetail').innerHTML = `<span>子午流注：<b>${meta.shichen}</b></span><span>属性：<b>${meta.element}</b></span>`;
   }
   $('#channelTotal').textContent = c
-    ? `本经 ${c.names.length} 穴 · 3D 示意 ${mapped.filter(x => x.meridian === c.name).length} 穴`
+    ? `本经 ${c.names.length} 穴 · 3D ${mapped.filter(x => x.meridian === c.name).length} 穴`
     : '经外奇穴 · 选录 2 穴';
 
   const sib = siblings();
   const i = sib.findIndex(x => x.id === id);
   $('#neighborIndex').textContent = `${i + 1} / ${sib.length}`;
+  if ($('#meridianProgress i')) {
+    const pct = sib.length > 0 ? Math.max(8, ((i + 1) / sib.length) * 100) : 100;
+    $('#meridianProgress i').style.width = `${pct.toFixed(1)}%`;
+  }
   $('#previous').disabled = i <= 0;
   $('#next').disabled = i < 0 || i === sib.length - 1;
   $('#nearby').innerHTML = sib
@@ -242,11 +323,12 @@ function select(id, turn = false) {
   const activeRow = $('#list .point-row.active');
   if (activeRow) activeRow.scrollIntoView({block: 'nearest', behavior: 'smooth'});
 
+  rebuildActiveQiParticles();
   if (turn && camera && p.modeled) focusPoint();
   updateEffects(turn && !p.modeled);
 }
 
-// 初始化解剖区域按钮
+// 初始化解剖区域矩阵
 $('#regions').innerHTML = ['全部', '头颈', '躯干', '背部', '上肢', '手部', '下肢', '足部']
   .map(r => `<button class="${r === '全部' ? 'active' : ''}">${r}</button>`)
   .join('');
@@ -266,24 +348,18 @@ $('#regions').querySelectorAll('button').forEach(b => {
   };
 });
 
-// 初始化经脉下拉与快捷胶囊
-$('#channelFilter').innerHTML =
-  '<option value="全部">全部十四经脉 + 奇穴</option>' +
-  channels.map(c => `<option value="${c.name}">${c.code} · ${c.name} (${channelMeta[c.name]?.element || ''})</option>`).join('') +
-  '<option value="经外奇穴">EX · 经外奇穴</option>';
-
+// 初始化 4x4 经脉矩阵
 $('#meridianPills').innerHTML =
-  `<button data-channel="全部" class="active">全部</button>` +
+  `<button data-channel="全部" class="active" title="全部十四经脉与奇穴">全部</button>` +
   channels
-    .map(c => `<button data-channel="${c.name}" title="${c.name} (${c.route})"><i style="background:${c.color}"></i>${channelMeta[c.name]?.short || c.code}</button>`)
+    .map(c => `<button data-channel="${c.name}" title="${c.name} · ${c.route}"><i style="background:${c.color}"></i>${channelMeta[c.name]?.short || c.code}</button>`)
     .join('') +
-  `<button data-channel="经外奇穴"><i style="background:${colors['经外奇穴']}"></i>奇穴</button>`;
+  `<button data-channel="经外奇穴" title="经外奇穴"><i style="background:${colors['经外奇穴']}"></i>奇穴</button>`;
 
 $('#meridianPills').querySelectorAll('button').forEach(b => {
   b.onclick = () => setChannelFilter(b.dataset.channel);
 });
 
-$('#channelFilter').onchange = e => setChannelFilter(e.target.value);
 $('#search').oninput = e => {
   query = e.target.value.trim();
   list();
@@ -303,7 +379,6 @@ $('#clear').onclick = () => {
   query = '';
   channelFilter = '全部';
   $('#search').value = '';
-  $('#channelFilter').value = '全部';
   $('#regions').querySelectorAll('button').forEach(b => b.classList.toggle('active', b.textContent === '全部'));
   list();
   setView('front');
@@ -319,9 +394,10 @@ $('#next').onclick = () => {
 };
 
 $('#summaryCounts').textContent = `${mapped.length} 个三维空间穴位 · ${mapped.filter(p => associations[p.code]).length} 个动态关联流光`;
-$('#footerCount').textContent = `已收录 361 正经穴 + 2 奇穴 · ${mapped.length} 个 3D 空间坐标`;
+$('#footerCount').textContent = `收录 361 正经穴 + 2 奇穴 · ${mapped.length} 个 3D 空间点位`;
 
 $('#sideChoice').onchange = () => {
+  rebuildActiveQiParticles();
   if (data[selected].modeled) focusPoint();
   updateEffects(true);
 };
@@ -358,7 +434,6 @@ function updateEffects(fit = false) {
   if (info && fit && $('#showEffects').checked) frameEffects();
 }
 
-// 丝滑相机过渡动画
 function flyTo(targetPos, camPos, duration = 680) {
   if (!camera || !controls) return;
   flyAnim = {
@@ -378,7 +453,7 @@ function frameEffects() {
   const p = data[selected], info = associations[p.code];
   const rear = p.pos?.[2] < 0 && info.targets.every(t => t[1][2] < 0);
   const side = Number($('#sideChoice').value);
-  flyTo(new T.Vector3(0, 4.32, 0), new T.Vector3(side * 1.35, 4.75, rear ? -12.6 : 12.6));
+  flyTo(new T.Vector3(0, 3.86, 0), new T.Vector3(side * 1.4, 4.35, rear ? -12.9 : 12.9));
   $$('[data-view]').forEach(b => b.classList.remove('active'));
 }
 
@@ -401,7 +476,7 @@ function focusPoint() {
   auto = false;
   $('#rotate').classList.remove('active');
   const dir = mark.normal.clone();
-  const dist = data[selected].view === 'sole' ? 2.6 : 3.05;
+  const dist = data[selected].view === 'sole' ? 2.5 : 2.95;
   const camPos = mark.mesh.position.clone().add(dir.multiplyScalar(dist));
   camPos.y += 0.12;
   flyTo(mark.mesh.position, camPos, 650);
@@ -413,91 +488,102 @@ function setView(v) {
   auto = false;
   $('#rotate').classList.remove('active');
   const side = Number($('#sideChoice').value);
-  const d = 12.2;
-  let target = new T.Vector3(0, 4.22, 0);
-  let cam = new T.Vector3(0, 4.5, d);
-  if (v === 'side') cam.set(side * d, 4.35, 0);
-  else if (v === 'back') cam.set(0, 4.35, -d);
+  const d = 12.6;
+  let target = new T.Vector3(0, 3.86, 0);
+  let cam = new T.Vector3(0, 4.28, d);
+  if (v === 'side') cam.set(side * d, 4.28, 0);
+  else if (v === 'back') cam.set(0, 4.28, -d);
   else if (v === 'head') {
-    target.set(0, 7.32, 0);
-    cam.set(0, 7.36, 3.15);
+    target.set(0, 7.34, 0);
+    cam.set(0, 7.38, 3.0);
   } else if (v === 'hand') {
     target.set(side * 1.68, 4.32, 0.05);
-    cam.set(side * 1.75, 4.38, 2.95);
+    cam.set(side * 1.72, 4.38, 2.85);
   } else if (v === 'foot') {
     target.set(side * 0.42, 0.55, 0.2);
-    cam.set(side * 0.65, 1.35, 3.25);
+    cam.set(side * 0.62, 1.32, 3.15);
   }
   flyTo(target, cam, 620);
   $$('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === v));
 }
 
-// 创建程序化工作室反射环境贴图 (无需外部 HDR 文件)
+// 光滑球形工作室反射穹顶贴图 (彻底消除几何体硬反射块)
 function createStudioEnvironment(renderer) {
   const pmrem = new T.PMREMGenerator(renderer);
-  const envScene = new T.Scene();
-  envScene.background = new T.Color(0x060d14);
+  const c = document.createElement('canvas');
+  c.width = 512;
+  c.height = 256;
+  const ctx = c.getContext('2d');
+  if (ctx) {
+    const bg = ctx.createLinearGradient(0, 0, 0, 256);
+    bg.addColorStop(0, '#dff7f4');
+    bg.addColorStop(0.28, '#1b4754');
+    bg.addColorStop(0.55, '#091924');
+    bg.addColorStop(1, '#04090f');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, 512, 256);
 
-  const topLight = new T.Mesh(
-    new T.PlaneGeometry(18, 18),
-    new T.MeshBasicMaterial({color: 0xdffbf7, side: T.DoubleSide})
-  );
-  topLight.position.set(0, 12, 0);
-  topLight.rotation.x = Math.PI / 2;
-  envScene.add(topLight);
-
-  const keyBox = new T.Mesh(
-    new T.PlaneGeometry(12, 16),
-    new T.MeshBasicMaterial({color: 0x6cf0dc, side: T.DoubleSide})
-  );
-  keyBox.position.set(-9, 6, 8);
-  keyBox.lookAt(0, 4, 0);
-  envScene.add(keyBox);
-
-  const warmBox = new T.Mesh(
-    new T.PlaneGeometry(12, 16),
-    new T.MeshBasicMaterial({color: 0xffd584, side: T.DoubleSide})
-  );
-  warmBox.position.set(9, 5, 6);
-  warmBox.lookAt(0, 4, 0);
-  envScene.add(warmBox);
-
-  const rimBox = new T.Mesh(
-    new T.PlaneGeometry(14, 14),
-    new T.MeshBasicMaterial({color: 0x4ba3c7, side: T.DoubleSide})
-  );
-  rimBox.position.set(0, 6, -10);
-  rimBox.lookAt(0, 4, 0);
-  envScene.add(rimBox);
-
-  const tex = pmrem.fromScene(envScene, 0.04).texture;
+    const drawSpot = (x, y, r, color) => {
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    };
+    drawSpot(145, 76, 95, 'rgba(255, 224, 165, 0.65)');
+    drawSpot(380, 92, 110, 'rgba(110, 242, 222, 0.6)');
+    drawSpot(260, 120, 90, 'rgba(110, 175, 255, 0.35)');
+  }
+  const equirect = new T.CanvasTexture(c);
+  equirect.mapping = T.EquirectangularReflectionMapping;
+  equirect.colorSpace = T.SRGBColorSpace;
+  const tex = pmrem.fromEquirectangular(equirect).texture;
+  equirect.dispose();
   pmrem.dispose();
   return tex;
 }
 
-// 绘制东方太极子午流注罗盘底座纹理
-function createCompassPedestalTexture() {
+// 绘制东方太极子午流注罗盘底座纹理（含当前时辰金光高亮扇区）
+function createCompassPedestalTexture(activeBranchIdx) {
   const c = document.createElement('canvas');
   c.width = c.height = 1024;
   const ctx = c.getContext('2d');
   if (!ctx) return null;
   const cx = 512, cy = 512;
 
-  const bg = ctx.createRadialGradient(cx, cy, 10, cx, cy, 500);
-  bg.addColorStop(0, 'rgba(108, 240, 220, 0.20)');
-  bg.addColorStop(0.45, 'rgba(30, 82, 92, 0.12)');
-  bg.addColorStop(0.85, 'rgba(10, 26, 36, 0.04)');
-  bg.addColorStop(1, 'rgba(6, 13, 20, 0)');
+  const bg = ctx.createRadialGradient(cx, cy, 12, cx, cy, 504);
+  bg.addColorStop(0, 'rgba(110, 242, 222, 0.22)');
+  bg.addColorStop(0.38, 'rgba(28, 78, 88, 0.14)');
+  bg.addColorStop(0.84, 'rgba(10, 26, 36, 0.04)');
+  bg.addColorStop(1, 'rgba(4, 10, 16, 0)');
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, 1024, 1024);
 
+  // 高亮当前当令时辰扇区
+  if (activeBranchIdx >= 0) {
+    const startAng = (activeBranchIdx * Math.PI * 2) / 12 - Math.PI / 2 - Math.PI / 12;
+    const endAng = startAng + Math.PI / 6;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, 466, startAng, endAng);
+    ctx.closePath();
+    const sg = ctx.createRadialGradient(cx, cy, 140, cx, cy, 466);
+    sg.addColorStop(0, 'rgba(245, 204, 126, 0.04)');
+    sg.addColorStop(0.65, 'rgba(245, 204, 126, 0.18)');
+    sg.addColorStop(1, 'rgba(245, 204, 126, 0.06)');
+    ctx.fillStyle = sg;
+    ctx.fill();
+    ctx.restore();
+  }
+
   const rings = [
-    [470, 'rgba(108, 240, 220, 0.32)', 2],
-    [448, 'rgba(245, 204, 126, 0.25)', 1.2],
-    [372, 'rgba(108, 240, 220, 0.22)', 1.5],
-    [300, 'rgba(108, 240, 220, 0.16)', 1],
-    [215, 'rgba(245, 204, 126, 0.22)', 1.5],
-    [130, 'rgba(108, 240, 220, 0.25)', 1]
+    [474, 'rgba(110, 242, 222, 0.36)', 2],
+    [454, 'rgba(245, 204, 126, 0.28)', 1.2],
+    [372, 'rgba(110, 242, 222, 0.26)', 1.5],
+    [296, 'rgba(110, 242, 222, 0.18)', 1],
+    [210, 'rgba(245, 204, 126, 0.26)', 1.5],
+    [136, 'rgba(110, 242, 222, 0.3)', 1.2]
   ];
   for (const [r, stroke, lw] of rings) {
     ctx.beginPath();
@@ -511,106 +597,212 @@ function createCompassPedestalTexture() {
   for (let i = 0; i < 72; i++) {
     const ang = (i * Math.PI * 2) / 72;
     const major = i % 6 === 0;
-    const r1 = major ? 448 : 456;
-    const r2 = 470;
+    const r1 = major ? 450 : 460;
+    const r2 = 474;
     ctx.beginPath();
     ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1);
     ctx.lineTo(cx + Math.cos(ang) * r2, cy + Math.sin(ang) * r2);
-    ctx.strokeStyle = major ? 'rgba(245, 204, 126, 0.55)' : 'rgba(108, 240, 220, 0.22)';
+    ctx.strokeStyle = major ? 'rgba(245, 204, 126, 0.65)' : 'rgba(110, 242, 222, 0.22)';
     ctx.lineWidth = major ? 2 : 1;
     ctx.stroke();
   }
 
   // 十二地支与十二正经刻度文字
   const branches = [
-    ['子 · 胆', '23-01'], ['丑 · 肝', '01-03'], ['寅 · 肺', '03-05'], ['卯 · 大肠', '05-07'],
-    ['辰 · 胃', '07-09'], ['巳 · 脾', '09-11'], ['午 · 心', '11-13'], ['未 · 小肠', '13-15'],
-    ['申 · 膀胱', '15-17'], ['酉 · 肾', '17-19'], ['戌 · 心包', '19-21'], ['亥 · 三焦', '21-23']
+    '子 · 胆', '丑 · 肝', '寅 · 肺', '卯 · 大肠',
+    '辰 · 胃', '巳 · 脾', '午 · 心', '未 · 小肠',
+    '申 · 膀胱', '酉 · 肾', '戌 · 心包', '亥 · 三焦'
   ];
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  branches.forEach(([label], idx) => {
+  branches.forEach((label, idx) => {
     const ang = (idx * Math.PI * 2) / 12 - Math.PI / 2;
+    const isNow = idx === activeBranchIdx;
     ctx.save();
-    ctx.translate(cx + Math.cos(ang) * 410, cy + Math.sin(ang) * 410);
+    ctx.translate(cx + Math.cos(ang) * 412, cy + Math.sin(ang) * 412);
     ctx.rotate(ang + Math.PI / 2);
-    ctx.font = '600 22px "Songti SC", "Noto Serif SC", serif';
-    ctx.fillStyle = 'rgba(220, 245, 242, 0.58)';
+    ctx.font = `${isNow ? '700 24px' : '600 21px'} "Songti SC", "Noto Serif SC", serif`;
+    ctx.fillStyle = isNow ? 'rgba(255, 228, 168, 0.96)' : 'rgba(205, 240, 236, 0.56)';
     ctx.fillText(label, 0, 0);
     ctx.restore();
 
-    // 径向分割虚线
     const lineAng = ang + Math.PI / 12;
     ctx.beginPath();
-    ctx.moveTo(cx + Math.cos(lineAng) * 215, cy + Math.sin(lineAng) * 215);
-    ctx.lineTo(cx + Math.cos(lineAng) * 448, cy + Math.sin(lineAng) * 448);
-    ctx.strokeStyle = 'rgba(108, 240, 220, 0.12)';
+    ctx.moveTo(cx + Math.cos(lineAng) * 210, cy + Math.sin(lineAng) * 210);
+    ctx.lineTo(cx + Math.cos(lineAng) * 454, cy + Math.sin(lineAng) * 454);
+    ctx.strokeStyle = 'rgba(110, 242, 222, 0.13)';
     ctx.lineWidth = 1;
     ctx.stroke();
   });
+
+  // 中心太极阴阳弧纹装饰
+  ctx.strokeStyle = 'rgba(245, 204, 126, 0.22)';
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.arc(cx, cy - 34, 34, -Math.PI / 2, Math.PI / 2);
+  ctx.arc(cx, cy + 34, 34, -Math.PI / 2, Math.PI / 2, true);
+  ctx.stroke();
 
   const tex = new T.CanvasTexture(c);
   tex.colorSpace = T.SRGBColorSpace;
   return tex;
 }
 
-// 切换人体三维材质预设 (琉璃玉质 / 天圣铜人 / 温润素肌)
+// 注入自定义 GLSL 菲涅尔边缘光、呼吸流韵、等高线与铜人包浆着色
+function attachSculpturalShader(mat) {
+  mat.onBeforeCompile = shader => {
+    shader.uniforms.uTime = skinUniforms.uTime;
+    shader.uniforms.uRimColor = skinUniforms.uRimColor;
+    shader.uniforms.uRimPower = skinUniforms.uRimPower;
+    shader.uniforms.uRimStrength = skinUniforms.uRimStrength;
+    shader.uniforms.uPatinaColor = skinUniforms.uPatinaColor;
+    shader.uniforms.uPatinaStrength = skinUniforms.uPatinaStrength;
+    shader.uniforms.uScanStrength = skinUniforms.uScanStrength;
+    shader.uniforms.uContourStrength = skinUniforms.uContourStrength;
+    shader.uniforms.uXrayFade = skinUniforms.uXrayFade;
+
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', `#include <common>\nvarying vec3 vObjPos;\nvarying vec3 vObjNormal;`)
+      .replace('#include <begin_vertex>', `#include <begin_vertex>\nvObjPos = position;\nvObjNormal = objectNormal;`);
+
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        '#include <common>',
+        `#include <common>
+         uniform float uTime;
+         uniform vec3 uRimColor;
+         uniform float uRimPower;
+         uniform float uRimStrength;
+         uniform vec3 uPatinaColor;
+         uniform float uPatinaStrength;
+         uniform float uScanStrength;
+         uniform float uContourStrength;
+         uniform float uXrayFade;
+         varying vec3 vObjPos;
+         varying vec3 vObjNormal;`
+      )
+      .replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+         vec3 vDir = normalize(vViewPosition);
+         vec3 nDir = normalize(normal);
+         float fresnel = pow(1.0 - clamp(abs(dot(nDir, vDir)), 0.0, 1.0), uRimPower);
+         float breath = 0.5 + 0.5 * sin(vObjPos.y * 1.75 - uTime * 1.25);
+         float contour = smoothstep(0.955, 0.995, abs(sin(vObjPos.y * 42.0))) * (0.25 + 0.75 * fresnel);
+         float patina = clamp(smoothstep(-0.15, 0.85, vObjNormal.y) * 0.45 + fresnel * 0.55, 0.0, 1.0) * uPatinaStrength;
+         diffuseColor.rgb = mix(diffuseColor.rgb, uPatinaColor, patina);
+         totalEmissiveRadiance += uRimColor * fresnel * uRimStrength * (1.0 + uScanStrength * breath);
+         totalEmissiveRadiance += uRimColor * contour * uContourStrength;
+         diffuseColor.a = mix(diffuseColor.a, clamp(0.18 + fresnel * 0.82, 0.18, 0.96), uXrayFade);`
+      );
+  };
+  mat.customProgramCacheKey = () => 'guanxue-sculptural-v2';
+}
+
+// 切换四种东方博物级材质
 function setBodyMaterial(mode) {
   if (!humanMesh) return;
   const [skin, eye] = humanMesh.material;
   if (mode === 'jade') {
-    skin.color.setHex(0x1f4952);
-    skin.emissive.setHex(0x082026);
-    skin.emissiveIntensity = 0.65;
-    skin.roughness = 0.24;
-    skin.metalness = 0.12;
-    skin.clearcoat = 0.88;
-    skin.clearcoatRoughness = 0.16;
-    skin.sheen = 0.85;
-    skin.sheenColor = new T.Color(0x73efda);
-    skin.sheenRoughness = 0.35;
+    skin.color.setHex(0x143840);
+    skin.emissive.setHex(0x05181e);
+    skin.emissiveIntensity = 0.55;
+    skin.roughness = 0.44;
+    skin.metalness = 0.08;
+    skin.clearcoat = 0.24;
+    skin.clearcoatRoughness = 0.42;
+    skin.sheen = 0.75;
+    skin.sheenColor = new T.Color(0x6ef2de);
+    skin.sheenRoughness = 0.45;
     skin.transparent = true;
-    skin.opacity = 0.94;
+    skin.opacity = 0.95;
+    skinUniforms.uRimColor.value.setHex(0x6ef2de);
+    skinUniforms.uRimPower.value = 2.35;
+    skinUniforms.uRimStrength.value = 0.85;
+    skinUniforms.uPatinaStrength.value = 0.0;
+    skinUniforms.uScanStrength.value = 0.34;
+    skinUniforms.uContourStrength.value = 0.09;
+    skinUniforms.uXrayFade.value = 0.0;
     eye.color.setHex(0x88e8dc);
     if (wireMesh) {
-      wireMesh.material.color.setHex(0x73efda);
-      wireMesh.material.opacity = 0.042;
-    }
-  } else if (mode === 'bronze') {
-    skin.color.setHex(0x9e7748);
-    skin.emissive.setHex(0x1b1106);
-    skin.emissiveIntensity = 0.38;
-    skin.roughness = 0.32;
-    skin.metalness = 0.82;
-    skin.clearcoat = 0.42;
-    skin.clearcoatRoughness = 0.24;
-    skin.sheen = 0.55;
-    skin.sheenColor = new T.Color(0x52c4ae);
-    skin.sheenRoughness = 0.4;
-    skin.transparent = false;
-    skin.opacity = 1;
-    eye.color.setHex(0xc9a775);
-    if (wireMesh) {
-      wireMesh.material.color.setHex(0xf5cc7e);
+      wireMesh.material.color.setHex(0x6ef2de);
       wireMesh.material.opacity = 0.032;
     }
-  } else {
-    skin.color.setHex(0xd49f82);
-    skin.emissive.setHex(0x1c0e08);
-    skin.emissiveIntensity = 0.22;
-    skin.roughness = 0.52;
-    skin.metalness = 0.02;
-    skin.clearcoat = 0.14;
-    skin.clearcoatRoughness = 0.5;
-    skin.sheen = 0.5;
-    skin.sheenColor = new T.Color(0xffd7c2);
-    skin.sheenRoughness = 0.6;
+  } else if (mode === 'bronze') {
+    skin.color.setHex(0x8a643b);
+    skin.emissive.setHex(0x160d05);
+    skin.emissiveIntensity = 0.35;
+    skin.roughness = 0.34;
+    skin.metalness = 0.82;
+    skin.clearcoat = 0.18;
+    skin.clearcoatRoughness = 0.38;
+    skin.sheen = 0.3;
+    skin.sheenColor = new T.Color(0xf5cc7e);
+    skin.sheenRoughness = 0.45;
     skin.transparent = false;
-    skin.opacity = 1;
-    eye.color.setHex(0xebe0d5);
+    skin.opacity = 1.0;
+    skinUniforms.uRimColor.value.setHex(0xf5cc7e);
+    skinUniforms.uRimPower.value = 2.8;
+    skinUniforms.uRimStrength.value = 0.52;
+    skinUniforms.uPatinaColor.value.setHex(0x479e8e);
+    skinUniforms.uPatinaStrength.value = 0.28;
+    skinUniforms.uScanStrength.value = 0.08;
+    skinUniforms.uContourStrength.value = 0.02;
+    skinUniforms.uXrayFade.value = 0.0;
+    eye.color.setHex(0xd6b078);
+    if (wireMesh) {
+      wireMesh.material.color.setHex(0xf5cc7e);
+      wireMesh.material.opacity = 0.024;
+    }
+  } else if (mode === 'xray') {
+    skin.color.setHex(0x061018);
+    skin.emissive.setHex(0x020912);
+    skin.emissiveIntensity = 0.35;
+    skin.roughness = 0.55;
+    skin.metalness = 0.1;
+    skin.clearcoat = 0.1;
+    skin.clearcoatRoughness = 0.5;
+    skin.sheen = 0.4;
+    skin.sheenColor = new T.Color(0x52c8ff);
+    skin.sheenRoughness = 0.4;
+    skin.transparent = true;
+    skin.opacity = 1.0;
+    skinUniforms.uRimColor.value.setHex(0x64d6ff);
+    skinUniforms.uRimPower.value = 1.85;
+    skinUniforms.uRimStrength.value = 1.25;
+    skinUniforms.uPatinaStrength.value = 0.0;
+    skinUniforms.uScanStrength.value = 0.45;
+    skinUniforms.uContourStrength.value = 0.22;
+    skinUniforms.uXrayFade.value = 0.92;
+    eye.color.setHex(0x7be0ff);
+    if (wireMesh) {
+      wireMesh.material.color.setHex(0x64d6ff);
+      wireMesh.material.opacity = 0.065;
+    }
+  } else {
+    skin.color.setHex(0xd8c8b6);
+    skin.emissive.setHex(0x1f140d);
+    skin.emissiveIntensity = 0.18;
+    skin.roughness = 0.56;
+    skin.metalness = 0.02;
+    skin.clearcoat = 0.08;
+    skin.clearcoatRoughness = 0.6;
+    skin.sheen = 0.45;
+    skin.sheenColor = new T.Color(0xffe6d4);
+    skin.sheenRoughness = 0.65;
+    skin.transparent = false;
+    skin.opacity = 1.0;
+    skinUniforms.uRimColor.value.setHex(0x88b4c4);
+    skinUniforms.uRimPower.value = 3.0;
+    skinUniforms.uRimStrength.value = 0.32;
+    skinUniforms.uPatinaStrength.value = 0.0;
+    skinUniforms.uScanStrength.value = 0.05;
+    skinUniforms.uContourStrength.value = 0.015;
+    skinUniforms.uXrayFade.value = 0.0;
+    eye.color.setHex(0xf2e9de);
     if (wireMesh) {
       wireMesh.material.color.setHex(0xffffff);
-      wireMesh.material.opacity = 0.018;
+      wireMesh.material.opacity = 0.014;
     }
   }
   skin.needsUpdate = true;
@@ -618,15 +810,17 @@ function setBodyMaterial(mode) {
   $$('#materialSwitch button').forEach(b => b.classList.toggle('active', b.dataset.mat === mode));
 }
 
+let dotTex = null;
+
 try {
   scene = new T.Scene();
-  camera = new T.PerspectiveCamera(42, 1, 0.1, 100);
+  camera = new T.PerspectiveCamera(38, 1, 0.1, 100);
   renderer = new T.WebGLRenderer({antialias: true, alpha: true, powerPreference: 'high-performance'});
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.12;
+  renderer.toneMappingExposure = 1.1;
   $('#canvas').appendChild(renderer.domElement);
 
   scene.environment = createStudioEnvironment(renderer);
@@ -635,26 +829,26 @@ try {
   controls.enableDamping = true;
   controls.dampingFactor = 0.065;
   controls.enablePan = true;
-  controls.minDistance = 1.9;
-  controls.maxDistance = 18.5;
+  controls.minDistance = 1.8;
+  controls.maxDistance = 19.5;
   controls.maxPolarAngle = Math.PI - 0.03;
   controls.minPolarAngle = 0.1;
   controls.addEventListener('start', () => {
     flyAnim = null;
   });
 
-  // 初始相机位置
-  camera.position.set(0, 4.5, 12.2);
-  controls.target.set(0, 4.22, 0);
+  // 初始全景构图：兼顾头部余白与脚下太极流注罗盘
+  camera.position.set(0, 4.28, 12.6);
+  controls.target.set(0, 3.86, 0);
   controls.update();
 
-  // 层次化戏剧光影
-  scene.add(new T.HemisphereLight(0xe4fbf7, 0x1c2833, 1.45));
+  // 博物馆戏剧光影布光
+  scene.add(new T.HemisphereLight(0xe6fbf7, 0x15202b, 1.35));
   const lights = [
-    [-4.5, 8.5, 5.5, 0xfff0d8, 2.4], // 暖金主光
-    [4.8, 6.0, -4.5, 0x6cf0dc, 2.2], // 青玉轮廓光
-    [-4.2, 4.0, -5.0, 0x5ea8ff, 1.5], // 背部冷蓝轮廓光
-    [0, 3.8, 6.5, 0xffffff, 0.55]    // 正面柔光补光
+    [-4.5, 8.8, 5.5, 0xffeccf, 2.1],
+    [5.0, 6.2, -4.5, 0x6ef2de, 2.0],
+    [-4.2, 4.0, -5.2, 0x5ea6ff, 1.4],
+    [0, 3.6, 6.8, 0xffffff, 0.5]
   ];
   for (const [x, y, z, c, intensity] of lights) {
     const l = new T.DirectionalLight(c, intensity);
@@ -663,6 +857,7 @@ try {
   }
 
   humanMesh = createHuman();
+  attachSculpturalShader(humanMesh.material[0]);
   scene.add(humanMesh);
   body.push(humanMesh);
 
@@ -670,23 +865,42 @@ try {
   wireMesh = new T.Mesh(
     humanMesh.geometry,
     new T.MeshBasicMaterial({
-      color: 0x73efda,
+      color: 0x6ef2de,
       wireframe: true,
       transparent: true,
-      opacity: 0.042,
+      opacity: 0.032,
       depthWrite: false
     })
   );
   scene.add(wireMesh);
 
-  // 默认应用东方琉璃玉质材质
   setBodyMaterial('jade');
 
-  // 罗盘底座
-  const compassTex = createCompassPedestalTexture();
+  // 脚下接地投影柔光盘
+  const shadowCanvas = document.createElement('canvas');
+  shadowCanvas.width = shadowCanvas.height = 128;
+  const sctx = shadowCanvas.getContext('2d');
+  if (sctx) {
+    const g = sctx.createRadialGradient(64, 64, 4, 64, 64, 60);
+    g.addColorStop(0, 'rgba(0, 0, 0, 0.72)');
+    g.addColorStop(0.55, 'rgba(0, 0, 0, 0.32)');
+    g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    sctx.fillStyle = g;
+    sctx.fillRect(0, 0, 128, 128);
+    const groundShadow = new T.Mesh(
+      new T.PlaneGeometry(2.1, 2.1),
+      new T.MeshBasicMaterial({map: new T.CanvasTexture(shadowCanvas), transparent: true, depthWrite: false})
+    );
+    groundShadow.rotation.x = -Math.PI / 2;
+    groundShadow.position.y = 0.145;
+    scene.add(groundShadow);
+  }
+
+  // 太极子午流注罗盘坛
+  const compassTex = createCompassPedestalTexture(activeShichen.branchIdx);
   if (compassTex) {
     compassMesh = new T.Mesh(
-      new T.PlaneGeometry(4.6, 4.6),
+      new T.PlaneGeometry(4.8, 4.8),
       new T.MeshBasicMaterial({
         map: compassTex,
         transparent: true,
@@ -695,49 +909,49 @@ try {
       })
     );
     compassMesh.rotation.x = -Math.PI / 2;
-    compassMesh.position.y = 0.13;
+    compassMesh.position.y = 0.12;
     scene.add(compassMesh);
   }
 
   const ring = new T.Mesh(
-    new T.TorusGeometry(1.42, 0.008, 10, 128),
-    new T.MeshBasicMaterial({color: 0x6cf0dc, transparent: true, opacity: 0.45})
+    new T.TorusGeometry(1.48, 0.008, 10, 128),
+    new T.MeshBasicMaterial({color: 0x6ef2de, transparent: true, opacity: 0.48})
   );
   ring.rotation.x = Math.PI / 2;
-  ring.position.y = 0.14;
+  ring.position.y = 0.13;
   scene.add(ring);
 
-  const outerRing = new T.Mesh(
-    new T.TorusGeometry(1.88, 0.005, 8, 128),
-    new T.MeshBasicMaterial({color: 0xf5cc7e, transparent: true, opacity: 0.24})
+  haloRingMesh = new T.Mesh(
+    new T.TorusGeometry(1.98, 0.005, 8, 128),
+    new T.MeshBasicMaterial({color: 0xf5cc7e, transparent: true, opacity: 0.28})
   );
-  outerRing.rotation.x = Math.PI / 2;
-  outerRing.position.y = 0.14;
-  scene.add(outerRing);
+  haloRingMesh.rotation.x = Math.PI / 2;
+  haloRingMesh.position.y = 0.11;
+  scene.add(haloRingMesh);
 
-  // 制作发光粒子贴图
+  // 径向发光粒子贴图
   const dotCanvas = document.createElement('canvas');
   dotCanvas.width = dotCanvas.height = 64;
   const dctx = dotCanvas.getContext('2d');
   if (dctx) {
     const g = dctx.createRadialGradient(32, 32, 0, 32, 32, 32);
     g.addColorStop(0, 'rgba(255,255,255,1)');
-    g.addColorStop(0.32, 'rgba(255,255,255,0.75)');
-    g.addColorStop(0.7, 'rgba(255,255,255,0.18)');
+    g.addColorStop(0.28, 'rgba(255,255,255,0.78)');
+    g.addColorStop(0.66, 'rgba(255,255,255,0.18)');
     g.addColorStop(1, 'rgba(255,255,255,0)');
     dctx.fillStyle = g;
     dctx.fillRect(0, 0, 64, 64);
   }
-  const dotTex = new T.CanvasTexture(dotCanvas);
+  dotTex = new T.CanvasTexture(dotCanvas);
 
   // 空间微尘气感粒子
-  const pCount = 70;
+  const pCount = 72;
   const pPositions = new Float32Array(pCount * 3);
   for (let i = 0; i < pCount; i++) {
-    const r = 1.1 + Math.random() * 1.6;
+    const r = 1.2 + Math.random() * 1.8;
     const theta = Math.random() * Math.PI * 2;
     pPositions[i * 3] = Math.cos(theta) * r;
-    pPositions[i * 3 + 1] = 0.3 + Math.random() * 7.8;
+    pPositions[i * 3 + 1] = 0.35 + Math.random() * 7.9;
     pPositions[i * 3 + 2] = Math.sin(theta) * r;
   }
   const pGeo = new T.BufferGeometry();
@@ -746,41 +960,74 @@ try {
     pGeo,
     new T.PointsMaterial({
       map: dotTex,
-      color: 0x73efda,
-      size: 0.08,
+      color: 0x6ef2de,
+      size: 0.075,
       transparent: true,
-      opacity: 0.32,
+      opacity: 0.28,
       depthWrite: false,
       blending: T.AdditiveBlending
     })
   );
   scene.add(ambientParticles);
 
-  // 选中穴位的贴合体表双环靶标
+  // 选中穴位的贴合体表双环靶标 + 金色光针
   reticleGroup = new T.Group();
   innerReticle = new T.Mesh(
-    new T.RingGeometry(0.068, 0.086, 48),
+    new T.RingGeometry(0.068, 0.088, 48),
     new T.MeshBasicMaterial({
       color: 0xf5cc7e,
       side: T.DoubleSide,
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.94,
       depthTest: false,
       blending: T.AdditiveBlending
     })
   );
   outerReticle = new T.Mesh(
-    new T.RingGeometry(0.115, 0.13, 48),
+    new T.RingGeometry(0.118, 0.134, 48),
     new T.MeshBasicMaterial({
-      color: 0x6cf0dc,
+      color: 0x6ef2de,
       side: T.DoubleSide,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.68,
       depthTest: false,
       blending: T.AdditiveBlending
     })
   );
-  reticleGroup.add(innerReticle, outerReticle);
+
+  // 东方针灸光针指示器 (沿体表法线 Z 方向立起)
+  needleGroup = new T.Group();
+  const shaft = new T.Mesh(
+    new T.CylinderGeometry(0.0022, 0.009, 0.38, 10),
+    new T.MeshBasicMaterial({
+      color: 0xffe6a3,
+      transparent: true,
+      opacity: 0.9,
+      blending: T.AdditiveBlending
+    })
+  );
+  shaft.rotation.x = Math.PI / 2;
+  shaft.position.z = 0.19;
+  const handle = new T.Mesh(
+    new T.SphereGeometry(0.017, 12, 10),
+    new T.MeshBasicMaterial({color: 0xfff5d6})
+  );
+  handle.position.z = 0.39;
+  const tipGlow = new T.Sprite(
+    new T.SpriteMaterial({
+      map: dotTex,
+      color: 0xf5cc7e,
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false,
+      blending: T.AdditiveBlending
+    })
+  );
+  tipGlow.scale.set(0.16, 0.16, 1);
+  tipGlow.position.z = 0.39;
+  needleGroup.add(shaft, handle, tipGlow);
+
+  reticleGroup.add(innerReticle, outerReticle, needleGroup);
   reticleGroup.renderOrder = 12;
   scene.add(reticleGroup);
 
@@ -809,42 +1056,41 @@ try {
 
       if (hit) {
         normal.copy(hit.face.normal).transformDirection(hit.object.matrixWorld);
-        pos.copy(hit.point).addScaledVector(normal, 0.032);
+        pos.copy(hit.point).addScaledVector(normal, 0.03);
       } else {
         const closest = nearestSurface(humanMesh, pos);
         normal.copy(closest.normal);
-        pos.copy(closest.point).addScaledVector(normal, 0.032);
+        pos.copy(closest.point).addScaledVector(normal, 0.03);
       }
 
       const baseColor = p.important ? '#f5cc7e' : colors[p.meridian];
-      const radius = p.important ? 0.044 : 0.026;
+      const radius = p.important ? 0.042 : 0.025;
       const m = new T.Mesh(
-        new T.SphereGeometry(radius, 18, 14),
+        new T.SphereGeometry(radius, 16, 12),
         new T.MeshBasicMaterial({color: baseColor})
       );
       m.position.copy(pos);
       m.userData.id = p.id;
       scene.add(m);
 
-      // 发光光晕 Sprite
       const glow = new T.Sprite(
         new T.SpriteMaterial({
           map: dotTex,
           color: baseColor,
           transparent: true,
-          opacity: p.important ? 0.72 : 0.48,
+          opacity: p.important ? 0.78 : 0.5,
           depthWrite: false,
           blending: T.AdditiveBlending
         })
       );
-      const gs = p.important ? 0.22 : 0.13;
+      const gs = p.important ? 0.23 : 0.13;
       glow.scale.set(gs, gs, 1);
       m.add(glow);
 
       const label = document.createElement('button');
       label.className = 'pin-label' + (p.important ? ' key-label' : '');
       label.style.setProperty('--pin-color', baseColor);
-      label.textContent = p.name;
+      label.innerHTML = `<span>${p.name}</span>${p.important ? `<small>${p.code}</small>` : ''}`;
       label.onclick = () => select(p.id, true);
       $('#labels').appendChild(label);
 
@@ -852,7 +1098,7 @@ try {
     }
   }
 
-  // 构建贴合人体曲面的平滑经脉曲线 + 经气循行粒子
+  // 构建贴合人体曲面的立体发光经脉管路 (TubeGeometry)
   for (const meridian of Object.keys(colors)) {
     for (const side of [-1, 1]) {
       const group = markers
@@ -861,49 +1107,42 @@ try {
 
       for (let i = 1; i < group.length; i++) {
         const a = group[i - 1], b = group[i];
-        if (
-          a.p.region !== b.p.region ||
-          a.mesh.position.distanceTo(b.mesh.position) > 1.22 ||
-          a.normal.dot(b.normal) < 0.25
-        ) continue;
+        const sameRegion = a.p.region === b.p.region;
+        const dist = a.mesh.position.distanceTo(b.mesh.position);
+        const dot = a.normal.dot(b.normal);
+        if ((sameRegion ? dist > 1.22 : dist > 0.65) || dot < (sameRegion ? 0.25 : 0.15)) continue;
 
-        // 曲面细分采样，让经脉线贴合人体表面而非穿模直线
         const ctrlPts = [a.mesh.position.clone()];
         const steps = 4;
         for (let s = 1; s < steps; s++) {
           const lerped = a.mesh.position.clone().lerp(b.mesh.position, s / steps);
           const surf = nearestSurface(humanMesh, lerped);
-          ctrlPts.push(surf.point.addScaledVector(surf.normal, 0.034));
+          ctrlPts.push(surf.point.addScaledVector(surf.normal, 0.031));
         }
         ctrlPts.push(b.mesh.position.clone());
 
         const curve = new T.CatmullRomCurve3(ctrlPts);
-        const line = new T.Line(
-          new T.BufferGeometry().setFromPoints(curve.getPoints(24)),
-          new T.LineBasicMaterial({
-            color: colors[meridian],
+        const baseMeridianCol = new T.Color(colors[meridian]);
+        const hiMeridianCol = baseMeridianCol.clone().lerp(new T.Color(0xffffff), 0.36);
+        const tube = new T.Mesh(
+          new T.TubeGeometry(curve, 18, 0.0095, 6, false),
+          new T.MeshBasicMaterial({
+            color: baseMeridianCol,
             transparent: true,
-            opacity: 0.62
+            opacity: 0.45
           })
         );
-        line.userData = {points: [a, b], meridian, curve};
-        scene.add(line);
-        lines.push(line);
-
-        // 每条经脉曲线段配置一颗流动经气粒子
-        const qi = new T.Sprite(
-          new T.SpriteMaterial({
-            map: dotTex,
-            color: colors[meridian],
-            transparent: true,
-            opacity: 0.85,
-            depthWrite: false,
-            blending: T.AdditiveBlending
-          })
-        );
-        qi.scale.set(0.09, 0.09, 1);
-        scene.add(qi);
-        qiParticles.push({sprite: qi, line, curve, offset: (i * 0.23) % 1});
+        scene.add(tube);
+        meridianSegments.push({
+          mesh: tube,
+          baseColor: baseMeridianCol,
+          hiColor: hiMeridianCol,
+          points: [a, b],
+          meridian,
+          side,
+          bilateral: a.p.bilateral || b.p.bilateral,
+          curve
+        });
       }
     }
   }
@@ -961,12 +1200,43 @@ try {
   select(selected);
 
   const screen = new T.Vector3(), world = new T.Vector3(), zAxis = new T.Vector3(0, 0, 1);
+  const bodyCenterProj = new T.Vector3(), bodyEdgeProj = new T.Vector3();
   let lastLabels = 0;
+
+  // 辅助：用投影点计算人体中心与半宽，供非遮挡引线布局使用
+  function getBodyScreenLayout(w) {
+    bodyCenterProj.set(0, 4.2, 0).project(camera);
+    const centerX = (bodyCenterProj.x * 0.5 + 0.5) * w;
+    // 取相机右侧水平向量计算投影半径
+    const camRight = new T.Vector3().setFromMatrixColumn(camera.matrixWorld, 0);
+    bodyEdgeProj.set(0, 4.2, 0).addScaledVector(camRight, 0.95).project(camera);
+    const edgeX = (bodyEdgeProj.x * 0.5 + 0.5) * w;
+    return {centerX, halfWidth: Math.max(40, Math.abs(edgeX - centerX))};
+  }
+
+  // 防重叠布局同侧标签
+  function resolveVerticalStack(items, minGap, minY, maxY) {
+    items.sort((a, b) => a.ay - b.ay);
+    for (let i = 0; i < items.length; i++) {
+      let y = Math.max(minY, Math.min(maxY, items[i].ay));
+      if (i > 0 && y - items[i - 1].ly < minGap) {
+        y = items[i - 1].ly + minGap;
+      }
+      items[i].ly = y;
+    }
+    for (let i = items.length - 1; i >= 0; i--) {
+      if (items[i].ly > maxY) {
+        items[i].ly = maxY;
+      }
+      if (i < items.length - 1 && items[i + 1].ly - items[i].ly < minGap) {
+        items[i].ly = items[i + 1].ly - minGap;
+      }
+    }
+  }
 
   function animate(time = 0) {
     requestAnimationFrame(animate);
 
-    // 丝滑相机飞行插值
     if (flyAnim) {
       const t = Math.min(1, (time - flyAnim.startTime) / flyAnim.duration);
       const ease = 1 - Math.pow(1 - t, 3);
@@ -975,12 +1245,14 @@ try {
       if (t >= 1) flyAnim = null;
     }
 
+    skinUniforms.uTime.value = time * 0.001;
     controls.autoRotate = auto;
     controls.autoRotateSpeed = 0.65;
     controls.update();
 
-    if (compassMesh) compassMesh.rotation.z = time * 0.00006;
-    if (ambientParticles) ambientParticles.rotation.y = -time * 0.00008;
+    if (compassMesh) compassMesh.rotation.z = time * 0.000055;
+    if (haloRingMesh) haloRingMesh.rotation.z = -time * 0.00012;
+    if (ambientParticles) ambientParticles.rotation.y = -time * 0.00007;
 
     const w = renderer.domElement.clientWidth, h = renderer.domElement.clientHeight;
     const activeSide = Number($('#sideChoice').value);
@@ -993,81 +1265,146 @@ try {
       const isHov = m.p.id === hoveredId;
       if (isSel) selectedMarker = m;
 
-      const pulse = isSel ? 1.55 + 0.15 * Math.sin(time * 0.006) : isHov ? 1.35 : 1;
+      const pulse = isSel ? 1.55 + 0.14 * Math.sin(time * 0.006) : isHov ? 1.35 : 1;
       m.mesh.scale.setScalar(pulse);
       m.mesh.material.color.set(
         isSel ? '#fff6d6' : isHov ? '#ffffff' : m.p.important ? '#f5cc7e' : colors[m.p.meridian]
       );
     }
 
-    // 更新选中穴位的体表双环靶标
+    // 更新选中穴位的体表双环靶标与金色光针
     if (selectedMarker && selectedMarker.mesh.visible) {
       reticleGroup.visible = true;
       reticleGroup.position.copy(selectedMarker.mesh.position);
       reticleGroup.quaternion.setFromUnitVectors(zAxis, selectedMarker.normal);
-      innerReticle.scale.setScalar(1 + 0.14 * Math.sin(time * 0.005));
-      const wave = (time * 0.0008) % 1;
-      outerReticle.scale.setScalar(0.9 + wave * 0.55);
-      outerReticle.material.opacity = 0.7 * (1 - wave);
+      innerReticle.scale.setScalar(1 + 0.12 * Math.sin(time * 0.005));
+      const wave = (time * 0.00085) % 1;
+      outerReticle.scale.setScalar(0.9 + wave * 0.6);
+      outerReticle.material.opacity = 0.72 * (1 - wave);
+      needleGroup.position.z = 0.02 + 0.025 * Math.sin(time * 0.004);
     } else {
       reticleGroup.visible = false;
     }
 
-    // 更新浮动穴位标签 (带遮挡剔除与防重叠)
-    if (time - lastLabels > 80) {
+    // 更新经脉立体光路与流动经气粒子（保持世界坐标不缩放，通过亮度与不透明度凸显当选经脉）
+    const showLines = $('#showLines').checked;
+    for (const seg of meridianSegments) {
+      const isVis = showLines && seg.points.every(m => visible(m.p));
+      seg.mesh.visible = isVis;
+      if (isVis) {
+        const isCurrent = seg.meridian === selectedPoint?.meridian;
+        seg.mesh.material.color.copy(isCurrent ? seg.hiColor : seg.baseColor);
+        seg.mesh.material.opacity = isCurrent ? 0.96 : 0.38;
+      }
+    }
+
+    for (const qp of activeQiParticles) {
+      qp.sprite.visible = qp.seg.mesh.visible;
+      if (qp.sprite.visible) {
+        const t = (time * 0.00052 + qp.offset) % 1;
+        qp.sprite.position.copy(qp.seg.curve.getPoint(t));
+      }
+    }
+
+    const layout = getBodyScreenLayout(w);
+    const effectLeaders = effectLayer ? effectLayer.update(time, camera, w, h, layout) : [];
+
+    // 更新洁净侧翼引线标签与 SVG 矢量牵引线
+    if (time - lastLabels > 70) {
       lastLabels = time;
-      const occupied = [];
-      const ordered = [...markers].sort(
-        (a, b) => (b.p.id === selected) - (a.p.id === selected) || Number(b.p.important) - Number(a.p.important)
-      );
+      const showLabels = $('#showLabels').checked;
+      const candidates = [];
+      const ordered = [...markers].sort((a, b) => {
+        const selDiff = (b.p.id === selected) - (a.p.id === selected);
+        if (selDiff) return selDiff;
+        const merDiff = (b.p.meridian === selectedPoint.meridian) - (a.p.meridian === selectedPoint.meridian);
+        if (merDiff) return merDiff;
+        return Number(b.p.important) - Number(a.p.important);
+      });
 
       for (const m of ordered) {
         m.label.hidden = true;
-        if (!m.mesh.visible || !$('#showLabels').checked) continue;
+        if (!m.mesh.visible || !showLabels) continue;
         if (m.p.bilateral && m.side !== activeSide) continue;
 
         screen.copy(m.mesh.position).project(camera);
-        const x = (screen.x * 0.5 + 0.5) * w, y = (-screen.y * 0.5 + 0.5) * h;
-        if (screen.z > 1 || screen.z < -1 || x < 10 || x > w - 85 || y < 95 || y > h - 75) continue;
+        const ax = (screen.x * 0.5 + 0.5) * w;
+        const ay = (-screen.y * 0.5 + 0.5) * h;
+        if (screen.z > 1 || screen.z < -1 || ax < 14 || ax > w - 14 || ay < 72 || ay > h - 68) continue;
 
         world.copy(camera.position).sub(m.mesh.position);
         if (world.dot(m.normal) < 0) continue;
-        if (occupied.length >= 18 && m.p.id !== selected) continue;
-        if (occupied.some(r => Math.abs(r.x - x) < 82 && Math.abs(r.y - y) < 26) && m.p.id !== selected) continue;
+
+        if (m.p.id !== selected && candidates.length >= 11) continue;
+        if (m.p.id !== selected && candidates.some(c => Math.hypot(c.ax - ax, c.ay - ay) < 42)) continue;
 
         ray.set(camera.position, world.clone().negate().normalize());
         const hit = ray.intersectObjects(body)[0];
         if (hit && hit.distance < world.length() - 0.04) continue;
 
-        occupied.push({x, y});
-        m.label.hidden = false;
-        m.label.classList.toggle('selected', m.p.id === selected);
-        m.label.style.left = x + 'px';
-        m.label.style.top = y + 'px';
+        candidates.push({m, ax, ay});
       }
+
+      const leftItems = [], rightItems = [];
+      const zoomedOut = layout.halfWidth < w * 0.24;
+      // 如果主治关联标签放在了左侧，尽量把常规标签偏向右侧（或按人体自然左右分配）
+      candidates.forEach((c, idx) => {
+        let sideDir = c.ax < layout.centerX - 6 ? 'left' : c.ax > layout.centerX + 6 ? 'right' : (idx % 2 === 0 ? 'right' : 'left');
+        if (zoomedOut && effectLeaders.length > 0) {
+          const effectOnLeft = effectLeaders[0].align === 'left';
+          if (effectOnLeft && Math.abs(c.ax - layout.centerX) < 30) sideDir = 'right';
+          if (!effectOnLeft && Math.abs(c.ax - layout.centerX) < 30) sideDir = 'left';
+        }
+        if (sideDir === 'left') leftItems.push(c);
+        else rightItems.push(c);
+      });
+
+      resolveVerticalStack(leftItems, 28, 92, h - 78);
+      resolveVerticalStack(rightItems, 28, 92, h - 78);
+
+      const svgParts = [];
+      for (const item of [...leftItems, ...rightItems]) {
+        const align = leftItems.includes(item) ? 'left' : 'right';
+        let lx;
+        if (zoomedOut) {
+          lx = align === 'right'
+            ? Math.min(w - 115, Math.max(item.ax + 26, layout.centerX + layout.halfWidth + 28))
+            : Math.max(115, Math.min(item.ax - 26, layout.centerX - layout.halfWidth - 28));
+        } else {
+          lx = align === 'right' ? Math.min(w - 115, item.ax + 34) : Math.max(115, item.ax - 34);
+        }
+
+        const isSel = item.m.p.id === selected;
+        item.m.label.hidden = false;
+        item.m.label.dataset.align = align;
+        item.m.label.classList.toggle('selected', isSel);
+        item.m.label.style.left = lx + 'px';
+        item.m.label.style.top = item.ly + 'px';
+
+        const elbowX = align === 'right'
+          ? item.ax + Math.min(18, Math.max(8, (lx - item.ax) * 0.4))
+          : item.ax - Math.min(18, Math.max(8, (item.ax - lx) * 0.4));
+        const cls = isSel ? 'selected' : item.m.p.important ? 'key' : '';
+        svgParts.push(
+          `<path class="leader-path ${cls}" d="M${item.ax.toFixed(1)},${item.ay.toFixed(1)} L${elbowX.toFixed(1)},${item.ly.toFixed(1)} L${lx.toFixed(1)},${item.ly.toFixed(1)}"/>` +
+          `<circle class="leader-dot ${cls}" cx="${item.ax.toFixed(1)}" cy="${item.ay.toFixed(1)}" r="${isSel ? 2.8 : 1.9}"/>`
+        );
+      }
+
+      for (const ef of effectLeaders) {
+        const elbowX = ef.align === 'right'
+          ? ef.ax + Math.min(20, Math.max(8, (ef.lx - ef.ax) * 0.35))
+          : ef.ax - Math.min(20, Math.max(8, (ef.ax - ef.lx) * 0.35));
+        svgParts.push(
+          `<path class="leader-path effect" d="M${ef.ax.toFixed(1)},${ef.ay.toFixed(1)} L${elbowX.toFixed(1)},${ef.ly.toFixed(1)} L${ef.lx.toFixed(1)},${ef.ly.toFixed(1)}"/>` +
+          `<circle class="leader-dot effect" cx="${ef.ax.toFixed(1)}" cy="${ef.ay.toFixed(1)}" r="2.8"/>`
+        );
+      }
+
+      const svgEl = $('#leaderLines');
+      if (svgEl) svgEl.innerHTML = svgParts.join('');
     }
 
-    // 更新经脉连线与经气循行粒子
-    const showLines = $('#showLines').checked;
-    for (const l of lines) {
-      const isVis = showLines && l.userData.points.every(m => visible(m.p));
-      l.visible = isVis;
-      if (isVis) {
-        const isCurrentMeridian = l.userData.meridian === selectedPoint?.meridian;
-        l.material.opacity = isCurrentMeridian ? 0.88 : 0.38;
-      }
-    }
-
-    for (const qp of qiParticles) {
-      const isCurrentMeridian = qp.line.userData.meridian === selectedPoint?.meridian;
-      qp.sprite.visible = qp.line.visible && (isCurrentMeridian || channelFilter !== '全部');
-      if (qp.sprite.visible) {
-        const t = (time * 0.00045 + qp.offset) % 1;
-        qp.sprite.position.copy(qp.curve.getPoint(t));
-      }
-    }
-
-    effectLayer?.update(time, camera, w, h);
     renderer.render(scene, camera);
   }
   animate();

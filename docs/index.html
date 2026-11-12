@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#070d12">
-  <title>观穴 · 3D 东方人体经穴图谱</title>
-  <link rel="stylesheet" href="style.css?v=20261112">
+  <meta name="theme-color" content="#050a0f">
+  <title>观穴 · 3D 东方人体经络穴位图谱</title>
+  <link rel="stylesheet" href="style.css?v=20261113">
   <script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
 </head>
 <body>
@@ -14,18 +14,18 @@
       <span class="seal" aria-hidden="true">穴</span>
       <div class="brand-text">
         <strong>观穴</strong>
-        <span class="brand-sub">ORIENTAL 3D ACUPOINT ATLAS · 经络三维图谱</span>
+        <span class="brand-sub">GUANXUE · ORIENTAL 3D ACUPOINT ATLAS</span>
       </div>
     </a>
 
     <div class="header-center">
-      <button id="shichenBtn" class="shichen-pill" title="点击筛选当前时辰当令经脉">
+      <button id="shichenBtn" class="shichen-pill" title="点击高亮并跳转至当前时辰当令经脉">
         <span class="shichen-dot"></span>
-        <span id="shichenText">子午流注 · 计算中</span>
+        <span id="shichenText">子午流注 · 演算中</span>
       </button>
       <div class="header-stats" aria-label="图谱概览">
-        <span><b>14</b> 经脉系统</span>
-        <span><b>361</b> 正经穴名</span>
+        <span><b>14</b> 经脉</span>
+        <span><b>361</b> 正经穴</span>
         <span><b>152</b> 3D 点位</span>
         <span><b>149</b> 关联流光</span>
       </div>
@@ -33,9 +33,10 @@
 
     <div class="edition">
       <div id="materialSwitch" class="mat-switch" role="group" aria-label="人体材质风格">
-        <button data-mat="jade" class="active" title="东方琉璃玉质半透明光感">琉璃玉质</button>
-        <button data-mat="bronze" title="致敬宋代天圣针灸铜人">天圣铜人</button>
-        <button data-mat="skin" title="现代医学素肌雕塑质感">温润素肌</button>
+        <button data-mat="jade" class="active" title="半透明东方青玉琉璃质感">琉璃青玉</button>
+        <button data-mat="bronze" title="致敬北宋天圣针灸铜人">天圣铜人</button>
+        <button data-mat="xray" title="暗黑玄影全息经脉透视">玄冥透影</button>
+        <button data-mat="ivory" title="现代医学汉白玉雕质感">汉白素雕</button>
       </div>
       <button id="immersive" class="immersive-btn" aria-pressed="false">⛶ 沉浸探索</button>
     </div>
@@ -56,22 +57,22 @@
 
         <label class="search">
           <span class="search-icon">⌕</span>
-          <input id="search" placeholder="搜索穴名 / 拼音 / 国际编码 (按 / 键)" aria-label="搜索穴位">
+          <input id="search" placeholder="穴名 / 拼音 / 编码 (按 / 搜索)" aria-label="搜索穴位">
           <kbd class="search-kbd">/</kbd>
         </label>
       </div>
 
       <div class="library-filters">
-        <div class="filter-row">
-          <label for="channelFilter" class="filter-label">按十四经脉浏览</label>
-          <select id="channelFilter"></select>
+        <div class="filter-head-row">
+          <span class="filter-label">十四经脉矩阵</span>
+          <span id="channelBadgeMini" class="filter-mini-tag">全部</span>
         </div>
         <div id="meridianPills" class="meridian-pills" aria-label="经脉快捷切换"></div>
         <div id="channelMeta" class="channel-meta" hidden></div>
         <p id="channelSummary" class="channel-summary"></p>
 
         <div id="regionSection">
-          <div class="filter-label">按解剖部位探索</div>
+          <div class="filter-label">解剖部位筛选</div>
           <div id="regions" class="chips"></div>
         </div>
       </div>
@@ -81,7 +82,7 @@
         <button id="clear">重置筛选 ↺</button>
       </div>
       <div id="list" class="point-list" role="region" aria-label="穴位列表"></div>
-      <div class="library-foot">带「3D」标记可空间定位 · 琥珀星标为重点研习穴</div>
+      <div class="library-foot">金标为重点研习穴 · 蓝标含动态主治流光</div>
     </aside>
 
     <!-- 中央：3D 人体经络交互舞台 -->
@@ -103,6 +104,7 @@
       <div class="stage-axis" aria-hidden="true"></div>
 
       <div id="canvas"></div>
+      <svg id="leaderLines" class="leader-lines" aria-hidden="true"></svg>
       <div id="labels"></div>
       <div id="effectLabels"></div>
       <div id="hoverTip" class="hover-tip" hidden></div>
@@ -117,7 +119,7 @@
           <button data-view="foot">足踝</button>
         </div>
         <div class="side-choice">
-          <label for="sideChoice">对称侧</label>
+          <label for="sideChoice">观察侧</label>
           <select id="sideChoice">
             <option value="1">人体左侧</option>
             <option value="-1">人体右侧</option>
@@ -127,15 +129,16 @@
 
       <div class="marker-legend" aria-label="穴位标记图例">
         <div class="legend-title">图例说明</div>
-        <span><i class="legend-key"></i>重点选录穴位 (25)</span>
+        <span><i class="legend-key"></i>重点研习穴 (25)</span>
         <span><i class="legend-normal"></i>经脉三维穴位</span>
-        <span><i class="legend-flow"></i>经气循行 / 关联线</span>
-        <small>重点为本图谱研习选录，不代表临床诊疗等级</small>
+        <span><i class="legend-needle"></i>选中穴位光针</span>
+        <span><i class="legend-flow"></i>经气与主治流光</span>
+        <small>学习示意坐标，不可用于临床诊疗</small>
       </div>
 
       <div class="stage-title" aria-hidden="true">
         <span>ORBIT · ZOOM · INSPECT</span>
-        <strong>左键旋转 · 滚轮缩放 · 右键平移 · 点击穴位聚焦</strong>
+        <strong>左键旋转 · 滚轮缩放 · 右键平移 · 方向键切换同经</strong>
       </div>
 
       <div class="zoom">
@@ -145,8 +148,8 @@
       </div>
 
       <div class="bottom-tools">
-        <label><input type="checkbox" id="showLabels" checked><span>穴位名称</span></label>
-        <label><input type="checkbox" id="showLines" checked><span>经脉连线</span></label>
+        <label><input type="checkbox" id="showLabels" checked><span>穴位引线</span></label>
+        <label><input type="checkbox" id="showLines" checked><span>经脉光路</span></label>
         <label><input type="checkbox" id="showWire" checked><span>肌理经纬</span></label>
         <div class="tool-sep"></div>
         <button id="rotate">⟳ 自动巡礼</button>
@@ -168,6 +171,7 @@
         <div class="detail-top">
           <span id="code" class="code"></span>
           <span id="elementBadge" class="element-badge"></span>
+          <span id="specialBadge" class="special-badge" hidden></span>
           <span id="bilateralBadge" class="mini-badge"></span>
         </div>
 
@@ -182,13 +186,13 @@
         </div>
 
         <button id="focus" class="focus">
-          <span>聚焦此穴位 · 镜头推进</span>
+          <span>聚焦此穴位 · 光针特写</span>
           <span class="focus-arrow">↗</span>
         </button>
       </div>
 
       <div class="info-card">
-        <div class="section-label"><span>01</span> 所在部位与解剖参考</div>
+        <div class="section-label"><span>01</span> 所在部位与体表标志</div>
         <p id="location" class="location"></p>
         <div class="tip-box">
           <span class="tip-icon">✦</span>
@@ -197,7 +201,7 @@
       </div>
 
       <div class="info-card">
-        <div class="section-label"><span>02</span> 所属经脉循行概览</div>
+        <div class="section-label"><span>02</span> 经脉循行与子午流注</div>
         <p id="routeInfo" class="route-info"></p>
         <div id="shichenDetail" class="shichen-detail"></div>
       </div>
@@ -211,6 +215,7 @@
             <button id="next" aria-label="下一穴" title="同经下一穴 (→)">→</button>
           </div>
         </div>
+        <div id="meridianProgress" class="meridian-progress" aria-hidden="true"><i></i></div>
         <div id="nearby" class="nearby"></div>
       </div>
 
@@ -224,7 +229,7 @@
         <a id="effectSource" class="source-link" target="_blank" rel="noreferrer">查阅资料来源文献 ↗</a>
 
         <div class="effect-controls">
-          <label class="toggle-pill"><input id="showEffects" type="checkbox" checked><span>显示三维关联流光</span></label>
+          <label class="toggle-pill"><input id="showEffects" type="checkbox" checked><span>三维关联流光</span></label>
           <button id="pauseEffects">暂停流动</button>
           <button id="fitEffects">全路径视角</button>
         </div>
