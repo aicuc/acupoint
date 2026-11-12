@@ -1288,9 +1288,74 @@ for(const [code,entry] of Object.entries(regionalAssociations)){
 
 export function createEffects(scene,container){
  const group=new T.Group();scene.add(group);let paths=[],labels=[],paused=false,enabled=true;const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let elapsed=0,lastTime=null;
- function clear(){for(const l of labels)l.remove();labels=[];group.traverse(o=>{o.geometry?.dispose();if(o.material)o.material.dispose();});group.clear();paths=[];}
- function show(point,start,side=1){clear();const info=associations[point.code];if(!info||!start)return;info.targets.forEach(([name,raw],i)=>{const end=new T.Vector3(...raw);end.x*=side;const middle=start.clone().lerp(end,.5);middle.x+=side*(.55+i*.13);middle.z=start.z<0&&end.z<0?Math.min(start.z,end.z)-.65-i*.12:Math.max(start.z,end.z)+.65+i*.12;const curve=new T.QuadraticBezierCurve3(start,middle,end);const line=new T.Line(new T.BufferGeometry().setFromPoints(curve.getPoints(70)),new T.LineBasicMaterial({color:0x56e4d2,transparent:true,opacity:.62,depthTest:false}));line.renderOrder=9;group.add(line);const beads=[];for(let j=0;j<5;j++){const bead=new T.Mesh(new T.SphereGeometry(.032,10,8),new T.MeshBasicMaterial({color:j===0?0xffffff:0x77ffdf,transparent:true,opacity:1-j*.13,depthTest:false}));bead.renderOrder=11;group.add(bead);beads.push(bead);}
- const halo=new T.Mesh(new T.RingGeometry(.12,.15,48),new T.MeshBasicMaterial({color:0x5eead4,side:T.DoubleSide,transparent:true,opacity:.7,depthTest:false}));halo.position.copy(end);halo.renderOrder=10;group.add(halo);const label=document.createElement('span');label.className='effect-label';label.textContent=name;container.appendChild(label);labels.push(label);paths.push({curve,end,beads,halo,label,index:i});});group.visible=enabled;}
- function update(time,camera,w,h){if(lastTime===null)lastTime=time;const dt=Math.min(100,time-lastTime);lastTime=time;if(!paused&&!reduced)elapsed+=dt;const occupied=[];for(const p of paths){const phase=(elapsed/2400+p.index*.18)%1;p.beads.forEach((b,j)=>b.position.copy(p.curve.getPoint((phase-j*.035+1)%1)));p.halo.quaternion.copy(camera.quaternion);p.halo.scale.setScalar(paused||reduced?1:1+.18*Math.sin(elapsed/350));const s=p.end.clone().project(camera),x=(s.x*.5+.5)*w;let y=(-s.y*.5+.5)*h;for(const r of occupied)if(Math.abs(r.x-x)<145&&Math.abs(r.y-y)<32)y=r.y+34;occupied.push({x,y});p.label.hidden=!enabled||s.z<-1||s.z>1||x<0||x>w||y<0||y>h;p.label.style.left=Math.max(5,Math.min(w-145,x+15))+'px';p.label.style.top=Math.max(5,Math.min(h-35,y))+'px';}}
+ const glowCanvas=document.createElement('canvas');glowCanvas.width=glowCanvas.height=64;
+ const gctx=glowCanvas.getContext('2d');
+ if(gctx){
+  const g=gctx.createRadialGradient(32,32,0,32,32,32);
+  g.addColorStop(0,'rgba(255,255,255,1)');
+  g.addColorStop(.28,'rgba(115,239,218,0.85)');
+  g.addColorStop(.65,'rgba(115,239,218,0.22)');
+  g.addColorStop(1,'rgba(115,239,218,0)');
+  gctx.fillStyle=g;gctx.fillRect(0,0,64,64);
+ }
+ const glowTex=new T.CanvasTexture(glowCanvas);
+ function clear(){for(const l of labels)l.remove();labels=[];group.traverse(o=>{o.geometry?.dispose();if(o.material&&o.material.map!==glowTex)o.material.dispose();});group.clear();paths=[];}
+ function show(point,start,side=1){
+  clear();const info=associations[point.code];if(!info||!start)return;
+  info.targets.forEach(([name,raw],i)=>{
+   const end=new T.Vector3(...raw);end.x*=side;
+   const middle=start.clone().lerp(end,.5);
+   middle.x+=side*(.58+i*.14);
+   middle.z=start.z<0&&end.z<0?Math.min(start.z,end.z)-.68-i*.13:Math.max(start.z,end.z)+.68+i*.13;
+   const curve=new T.QuadraticBezierCurve3(start,middle,end);
+   const innerTube=new T.Mesh(
+    new T.TubeGeometry(curve,64,.011,8,false),
+    new T.MeshBasicMaterial({color:0x88ffea,transparent:true,opacity:.85,depthTest:false,blending:T.AdditiveBlending})
+   );
+   const outerTube=new T.Mesh(
+    new T.TubeGeometry(curve,48,.028,8,false),
+    new T.MeshBasicMaterial({color:0x4cdbc4,transparent:true,opacity:.22,depthTest:false,blending:T.AdditiveBlending})
+   );
+   innerTube.renderOrder=9;outerTube.renderOrder=8;
+   group.add(innerTube,outerTube);
+   const beads=[];
+   for(let j=0;j<7;j++){
+    const sp=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:j===0?0xfff6d6:j<3?0x88ffea:0x4cdbc4,transparent:true,opacity:Math.max(.18,1-j*.13),depthTest:false,blending:T.AdditiveBlending}));
+    const s=(j===0?.15:.11)*(1-j*.08);
+    sp.scale.set(s,s,1);sp.renderOrder=11;group.add(sp);beads.push(sp);
+   }
+   const haloGroup=new T.Group();haloGroup.position.copy(end);haloGroup.renderOrder=10;
+   const innerRing=new T.Mesh(new T.RingGeometry(.09,.118,48),new T.MeshBasicMaterial({color:0x73efda,side:T.DoubleSide,transparent:true,opacity:.82,depthTest:false,blending:T.AdditiveBlending}));
+   const outerRing=new T.Mesh(new T.RingGeometry(.155,.172,48),new T.MeshBasicMaterial({color:0xf4cb86,side:T.DoubleSide,transparent:true,opacity:.45,depthTest:false,blending:T.AdditiveBlending}));
+   const coreGlow=new T.Sprite(new T.SpriteMaterial({map:glowTex,color:0x73efda,transparent:true,opacity:.55,depthTest:false,blending:T.AdditiveBlending}));
+   coreGlow.scale.set(.32,.32,1);
+   haloGroup.add(innerRing,outerRing,coreGlow);group.add(haloGroup);
+   const label=document.createElement('span');label.className='effect-label';
+   label.innerHTML=`<i class="effect-dot"></i><span>${name}</span>`;
+   container.appendChild(label);labels.push(label);
+   paths.push({curve,end,beads,halo:haloGroup,innerRing,outerRing,label,index:i});
+  });
+  group.visible=enabled;
+ }
+ function update(time,camera,w,h){
+  if(lastTime===null)lastTime=time;const dt=Math.min(100,time-lastTime);lastTime=time;
+  if(!paused&&!reduced)elapsed+=dt;const occupied=[];
+  for(const p of paths){
+   const phase=(elapsed/2300+p.index*.21)%1;
+   p.beads.forEach((b,j)=>b.position.copy(p.curve.getPoint((phase-j*.028+1)%1)));
+   p.halo.quaternion.copy(camera.quaternion);
+   const pulse=paused||reduced?1:1+.16*Math.sin(elapsed/320+p.index);
+   p.innerRing.scale.setScalar(pulse);
+   const wave=paused||reduced?1:1+.28*((elapsed/1400+p.index*.3)%1);
+   p.outerRing.scale.setScalar(wave);
+   p.outerRing.material.opacity=paused||reduced?.4:.55*(1-((elapsed/1400+p.index*.3)%1));
+   const s=p.end.clone().project(camera),x=(s.x*.5+.5)*w;let y=(-s.y*.5+.5)*h;
+   for(const r of occupied)if(Math.abs(r.x-x)<148&&Math.abs(r.y-y)<34)y=r.y+36;
+   occupied.push({x,y});
+   p.label.hidden=!enabled||s.z<-1||s.z>1||x<0||x>w||y<0||y>h;
+   p.label.style.left=Math.max(14,Math.min(w-150,x+18))+'px';
+   p.label.style.top=Math.max(68,Math.min(h-72,y-12))+'px';
+  }
+ }
  return {show,clear,update,setEnabled(v){enabled=v;group.visible=v;for(const l of labels)l.hidden=!v;},setPaused(v){paused=v;},get active(){return paths.length>0;}};
 }
